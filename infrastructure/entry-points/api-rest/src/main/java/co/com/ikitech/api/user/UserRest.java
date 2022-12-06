@@ -61,5 +61,7 @@ public class UserRest extends IkiTechRestService<UserDTO, User> {
     public Mono<Void> delete(@PathVariable String id){
 
         return useCase.deleteUser(id);
+
     }
+    
 }

@@ -49,7 +49,7 @@ public class UserUseCase implements UserOperations {
     return Mono.just(repository.findById(id)).switchIfEmpty(new AppException(UserMessageError.USER_NOT_EXIST.value)
             .flatMap(r -> repository.deleteById(id));
 
-            ahora si carajo?
+
       }
      */
 }
