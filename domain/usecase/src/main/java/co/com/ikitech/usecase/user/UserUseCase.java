@@ -50,7 +50,7 @@ public class UserUseCase implements UserOperations {
       }
      */
 
-    public Mono<Integer> showUserAmount(String id){
+      public Mono<Integer> showUserAmount(String id){
 
         return this.getById(id).flatMap(user -> showAmount(user));
     }
