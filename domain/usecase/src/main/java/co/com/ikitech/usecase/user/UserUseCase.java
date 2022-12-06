@@ -10,6 +10,7 @@ import reactor.core.publisher.*;
 @RequiredArgsConstructor
 public class UserUseCase implements UserOperations {
 
+
     private final Repository<User> repository;
 
     public Mono<User> create(User user){
@@ -50,4 +51,9 @@ public class UserUseCase implements UserOperations {
             .flatMap(r -> repository.deleteById(id));
       }
      */
+
+    public Mono<Integer> showUserAmount(String id){
+
+        return this.getById(id).flatMap(user -> showAmount(user));
+    }
 }

@@ -4,6 +4,7 @@ import co.com.ikitech.model.user.user.*;
 import co.com.ikitech.mongo.helper.*;
 import org.reactivecommons.utils.*;
 import org.springframework.stereotype.*;
+import reactor.core.publisher.Mono;
 
 @Repository
 public class UserRepositoryAdapter extends AdapterOperations<User, UserEntity, String, UserDBRepository>
@@ -15,5 +16,6 @@ public class UserRepositoryAdapter extends AdapterOperations<User, UserEntity, S
 
         super(repository, mapper, d -> mapper.map(d, User.class));
     }
+
 
 }
