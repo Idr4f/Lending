@@ -33,16 +33,14 @@ public class UserUseCase implements UserOperations {
 
     public Mono<User> update(String id,User user){
 
-        return Mono.just(user).flatMap(u -> repository.findById(id))
-                .switchIfEmpty(Mono.error(new AppException(UserMessageError.USER_NOT_EXIST.value)))
+        return Mono.just(user).flatMap(user1 -> this.getById(id))
                 .flatMap(userDB -> updateModel(user, userDB))
                 .flatMap(repository::save);
     }
 
     public Mono<Void> deleteUser(String id) {
         //Es:
-        return this.getById(id)
-                .flatMap(r -> repository.deleteById(id));
+        return this.getById(id).flatMap(r -> repository.deleteById(id));
     }
     /*Era:
     public Mono<Void> deleteUser(String id){
@@ -56,4 +54,5 @@ public class UserUseCase implements UserOperations {
 
         return this.getById(id).flatMap(user -> showAmount(user));
     }
+
 }

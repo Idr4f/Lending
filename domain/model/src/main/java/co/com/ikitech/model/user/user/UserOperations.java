@@ -24,4 +24,5 @@ public interface UserOperations {
 
         return Mono.just(user.getAmount());
     }
+
 }
