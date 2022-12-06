@@ -2,7 +2,7 @@
 
 ## Antes de Iniciar
 
-Empezaremos por explicar los diferentes componentes del proyectos y partiremos de los componentes externos, continuando con los componentes core de negocio (dominio) y por último el inicio y configuración de la aplicación.
+Empezaremos por explicar los diferentes componentes del proyecto y partiremos de los componentes externos, continuando con los componentes core de negocio (dominio) y por último el inicio y configuración de la aplicación.
 
 Lee el artículo [Clean Architecture — Aislando los detalles](https://medium.com/bancolombia-tech/clean-architecture-aislando-los-detalles-4f9530f35d7a)
 
@@ -38,10 +38,10 @@ interactuar.
 
 ### Entry Points
 
-Los entry points representan los puntos de entrada de la aplicación o el inicio de los flujos de negocio.
+Los entry points representan los puntos de entrada de la aplicación o el inicio de los flujos de negocios.
 
 ## Application
 
-Este módulo es el más externo de la arquitectura, es el encargado de ensamblar los distintos módulos, resolver las dependencias y crear los beans de los casos de use (UseCases) de forma automática, inyectando en éstos instancias concretas de las dependencias declaradas. Además inicia la aplicación (es el único módulo del proyecto donde encontraremos la función “public static void main(String[] args)”.
+Este módulo es el más externo de la arquitectura, es el encargado de ensamblar los distintos módulos, resolver las dependencias y crear los beans de los casos de uso (UseCases) de forma automática, inyectando en estas instancias concretas de las dependencias declaradas. Además, inicia la aplicación (es el único módulo del proyecto donde encontraremos la función “public static void main(String[] args)").
 
 **Los beans de los casos de uso se disponibilizan automaticamente gracias a un '@ComponentScan' ubicado en esta capa.**
