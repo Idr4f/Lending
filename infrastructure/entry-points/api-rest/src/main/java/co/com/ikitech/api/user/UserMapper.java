@@ -16,5 +16,4 @@ UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
 
 
     UserDTO toTransferObject(User user);
-
 }
