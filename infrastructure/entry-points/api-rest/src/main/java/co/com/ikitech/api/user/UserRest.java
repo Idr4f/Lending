@@ -63,10 +63,4 @@ public class UserRest extends IkiTechRestService<UserDTO, User> {
         return useCase.deleteUser(id);
 
     }
-
-    @GetMapping(path = "/user/amount/{id}")
-    public Mono<Integer> showAmount(@PathVariable String id){
-
-        return useCase.showUserAmount(id);
-    }
 }

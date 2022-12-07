@@ -16,12 +16,8 @@ public interface UserOperations {
                         .email(user.getEmail())
                         .address(user.getAddress())
                         .phone(user.getPhone())
-                        .amount(user.getAmount())
                 .build());
     }
 
-    default Mono<Integer> showAmount(User user){
 
-        return Mono.just(user.getAmount());
-    }
 }
