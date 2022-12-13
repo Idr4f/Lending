@@ -1,12 +1,12 @@
-package co.com.ikitech.model.user.document;
+package co.com.ikitech.api.user;
 
-//Enum de los tipos de documentos que se permiten en colombia
-public enum DocumentType {
+//DTO del tipo de documento
+public enum DocumentTypeDTO {
     CC("Cedula de Ciudadanía"),
     CE("Cedula De Extranjería"),
     PEP("Permiso Especial De Permanencia"),
     PAP("Pasaporte"),
     NIT("Número De Identificacion Tributaria");
     public final String value;
-    DocumentType(String value){this.value = value;}
+    DocumentTypeDTO(String value){this.value = value;}
 }

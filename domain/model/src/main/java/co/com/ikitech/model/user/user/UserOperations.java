@@ -2,6 +2,7 @@ package co.com.ikitech.model.user.user;
 
 import reactor.core.publisher.*;
 
+//operaciones a realizar con el model, sin usar directamente el model
 public interface UserOperations {
 
     default Mono<User> updateModel(User user, User userDB){

@@ -5,7 +5,5 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class MainApplication {
-    public static void main(String... ikitech) {
-        SpringApplication.run(MainApplication.class, ikitech);
-    }
+    public static void main(String... ikitech) {SpringApplication.run(MainApplication.class, ikitech);}
 }

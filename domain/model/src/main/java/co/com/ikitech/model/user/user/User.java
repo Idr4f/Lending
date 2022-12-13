@@ -1,4 +1,5 @@
 package co.com.ikitech.model.user.user;
+
 import co.com.ikitech.model.user.document.DocumentType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,6 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)
+//Modelo principal de los datos del usuario
 public class User {
 
     private String id;
@@ -19,5 +21,4 @@ public class User {
     private String email;
     private String address;
     private String phone;
-
 }
