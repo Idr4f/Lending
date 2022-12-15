@@ -1,9 +1,7 @@
-package co.com.ikitech.api.user.credit;
+package co.com.ikitech.api.credit;
 
 
-import co.com.ikitech.api.user.user.UserDTO;
 import co.com.ikitech.model.user.credit.Credit;
-import co.com.ikitech.model.user.user.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;

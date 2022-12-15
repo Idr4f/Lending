@@ -1,4 +1,4 @@
-package co.com.ikitech.model.user.user;
+package co.com.ikitech.model.user.customer;
 
 import co.com.ikitech.model.user.credit.Credit;
 import co.com.ikitech.model.user.document.DocumentType;
@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder(toBuilder = true)
 //Modelo principal de los datos del usuario
-public class User {
+public class Customer {
 
     private String id;
     private String names;

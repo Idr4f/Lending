@@ -1,4 +1,4 @@
-package co.com.ikitech.model.user.user;
+package co.com.ikitech.model.user.customer;
 
 import co.com.ikitech.model.user.credit.Credit;
 import reactor.core.publisher.Mono;
@@ -6,9 +6,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 //operaciones a realizar con el model, sin usar directamente el model
-public interface UserOperations {
+public interface CustomerOperations {
 
-    default Mono<User> updateModel(User user, User userDB){
+    default Mono<Customer> updateModel(Customer user, Customer userDB){
 
         return Mono.just(userDB
                 .toBuilder()
@@ -24,7 +24,7 @@ public interface UserOperations {
                 .build());
     }
 
-    default Mono<User> createCredit(Credit credit, User userDB){
+    default Mono<Customer> createCredit(Credit credit, Customer userDB){
 
         return Mono.just(userDB
                 .toBuilder()
@@ -36,13 +36,16 @@ public interface UserOperations {
                         .email(userDB.getEmail())
                         .address(userDB.getAddress())
                         .phone(userDB.getPhone())
-                        .credit(credit.toBuilder()
+                        .credit(credit
+                                .toBuilder()
                                     .id(credit.getId())
                                     .dateLoan(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm:ss")))
                                     .valueDisbursed(credit.getValueDisbursed())
                                     .paymentDeadline(credit.getPaymentDeadline())
                                     .interestValuation(credit.getInterestValuation())
                                     .interestValue(credit.getValueDisbursed() + credit.getInterestValuation()/100)
+                                    .deposited(0L)
+                                    .remainingDebt(credit.getValueDisbursed())
                                 .build())
                 .build());
     }

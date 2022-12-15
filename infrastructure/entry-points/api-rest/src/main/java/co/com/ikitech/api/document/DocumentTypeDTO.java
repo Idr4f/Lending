@@ -1,4 +1,4 @@
-package co.com.ikitech.api.user.document;
+package co.com.ikitech.api.document;
 
 //DTO del tipo de documento
 public enum DocumentTypeDTO {

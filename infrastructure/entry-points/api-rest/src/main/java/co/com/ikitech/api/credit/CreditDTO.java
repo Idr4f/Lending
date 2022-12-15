@@ -1,4 +1,4 @@
-package co.com.ikitech.api.user.credit;
+package co.com.ikitech.api.credit;
 
 import lombok.*;
 
@@ -14,4 +14,5 @@ public class CreditDTO {
     private String paymentDeadline;
     private Long interestValuation;
     private Long interestValue;
+    private Long remainingDebt;
 }

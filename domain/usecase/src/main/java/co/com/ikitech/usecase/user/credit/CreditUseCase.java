@@ -1,4 +1,4 @@
-package co.com.ikitech.usecase.user;
+package co.com.ikitech.usecase.user.credit;
 
 import co.com.ikitech.model.user.credit.*;
 import co.com.ikitech.model.user.error.UserMessageError;

@@ -1,4 +1,4 @@
-package co.com.ikitech.api.user.ikitech;
+package co.com.ikitech.api.ikitech;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

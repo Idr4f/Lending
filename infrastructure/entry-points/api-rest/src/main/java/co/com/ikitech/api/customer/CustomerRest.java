@@ -1,27 +1,25 @@
-package co.com.ikitech.api.user.user;
+package co.com.ikitech.api.customer;
 
-import co.com.ikitech.api.user.credit.*;
-import co.com.ikitech.api.user.ikitech.*;
-import co.com.ikitech.model.user.user.*;
-import co.com.ikitech.usecase.user.*;
+import co.com.ikitech.api.credit.CreditDTO;
+import co.com.ikitech.api.credit.CreditMapper;
+import co.com.ikitech.api.ikitech.IkiTechRestService;
+import co.com.ikitech.model.user.customer.Customer;
+import co.com.ikitech.usecase.user.customer.CustomerUseCase;
 import lombok.*;
 import org.mapstruct.factory.Mappers;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
-import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
-
-import javax.validation.*;
-import java.util.Locale;
-import java.util.Map;
+import reactor.core.publisher.*;
+import javax.validation.Valid;
+import java.util.*;
 
 @RestController
 @RequestMapping(value = "/api", produces = MediaType.APPLICATION_JSON_VALUE)
 @AllArgsConstructor
-public class UserRest extends IkiTechRestService<UserDTO, User> {
-    private final UserUseCase useCase;
+public class CustomerRest extends IkiTechRestService<CustomerDTO, Customer> {
+    private final CustomerUseCase useCase;
 
-    private final UserMapper MAPPER = Mappers.getMapper(UserMapper.class);
+    private final CustomerMapper MAPPER = Mappers.getMapper(CustomerMapper.class);
     private final CreditMapper MAP = Mappers.getMapper(CreditMapper.class);
 
 
@@ -29,7 +27,7 @@ public class UserRest extends IkiTechRestService<UserDTO, User> {
 
     public Mono<ResponseEntity<Map<String, Object>>> createRecord(@RequestHeader(name = "Accept-Language", required = false)
                                                                       final Locale locale,
-                                                                  @Valid @RequestBody UserDTO dto) {
+                                                                  @Valid @RequestBody CustomerDTO dto) {
 
         return Mono.just(dto)
                 .flatMap(dataTransfer -> useCase.create(MAPPER.toEntity(dataTransfer)))
@@ -38,19 +36,19 @@ public class UserRest extends IkiTechRestService<UserDTO, User> {
     }
 
     @GetMapping(path = "/user")
-    public Flux<User> getAll(){
+    public Flux<Customer> getAll(){
 
         return useCase.getAll();
     }
 
     @GetMapping(path = "/user/{id}")
-    public Mono<User> getUserById(@PathVariable String id){
+    public Mono<Customer> getUserById(@PathVariable String id){
 
         return useCase.getById(id);
     }
 
     @PutMapping(path = "/user/{id}")
-    public Mono<ResponseEntity<Map<String, Object>>> updateUser(@PathVariable String id, @RequestBody UserDTO dto){
+    public Mono<ResponseEntity<Map<String, Object>>> updateUser(@PathVariable String id, @RequestBody CustomerDTO dto){
 
         return Mono.just(dto).flatMap(dataTransfer -> useCase.update(id, MAPPER.toEntity(dataTransfer))
                 .map(businessObject -> createResponseSuccess(businessObject,
@@ -65,7 +63,7 @@ public class UserRest extends IkiTechRestService<UserDTO, User> {
     }
 
     @PostMapping (path = "/user/credit/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Mono<User> createCredit(@PathVariable String id, @RequestBody CreditDTO dto){
+    public Mono<Customer> createCredit(@PathVariable String id, @RequestBody CreditDTO dto){
 
         return Mono.just(dto).flatMap(dataTransfer -> useCase.createUserCredit(id, MAP.toEntityCredit(dto)));
     }

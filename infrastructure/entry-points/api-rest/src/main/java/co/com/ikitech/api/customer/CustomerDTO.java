@@ -1,13 +1,13 @@
-package co.com.ikitech.api.user.user;
+package co.com.ikitech.api.customer;
 
-import co.com.ikitech.api.user.credit.CreditDTO;
-import co.com.ikitech.api.user.document.DocumentTypeDTO;
+import co.com.ikitech.api.credit.CreditDTO;
+import co.com.ikitech.api.document.DocumentTypeDTO;
 import lombok.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder(toBuilder = true)
-public class UserDTO {
+public class CustomerDTO {
     private String id;
     private String names;
     private  String surNames;

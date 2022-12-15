@@ -1,38 +1,38 @@
-package co.com.ikitech.usecase.user;
+package co.com.ikitech.usecase.user.customer;
 
 import co.com.ikitech.model.user.credit.Credit;
 import co.com.ikitech.model.user.error.UserMessageError;
 import co.com.ikitech.model.user.exceptions.AppException;
 import co.com.ikitech.model.user.repository.*;
-import co.com.ikitech.model.user.user.*;
+import co.com.ikitech.model.user.customer.*;
 import lombok.*;
 import reactor.core.publisher.*;
 
 @RequiredArgsConstructor
-public class UserUseCase implements UserOperations {
+public class CustomerUseCase implements CustomerOperations {
 
 
-    private final Repository<User> repository;
+    private final Repository<Customer> repository;
 
-    public Mono<User> create(User user){
+    public Mono<Customer> create(Customer user){
 
         return repository.save(user)
                 .switchIfEmpty(Mono.error(new AppException(UserMessageError.USER_NOT_CREATE.value)));
     }
 
-    public Flux<User> getAll(){
+    public Flux<Customer> getAll(){
 
         return repository.findAll()
                 .switchIfEmpty(Mono.error(new AppException(UserMessageError.NO_USERS_CREATED.value)));
     }
 
-    public Mono<User> getById(String id){
+    public Mono<Customer> getById(String id){
 
         return repository.findById(id)
                 .switchIfEmpty(Mono.error(new AppException(UserMessageError.USER_NOT_EXIST.value)));
     }
 
-    public Mono<User> update(String id,User user){
+    public Mono<Customer> update(String id, Customer user){
 
         return Mono.just(user).flatMap(user1 -> this.getById(id))
                 .flatMap(userDB -> updateModel(user, userDB))
@@ -51,7 +51,7 @@ public class UserUseCase implements UserOperations {
       }
      */
 
-    public Mono<User> createUserCredit(String id, Credit credit){
+    public Mono<Customer> createUserCredit(String id, Credit credit){
 
         return Mono.just(credit).flatMap(user1 -> this.getById(id))
                 .flatMap(userDB -> createCredit(credit, userDB))

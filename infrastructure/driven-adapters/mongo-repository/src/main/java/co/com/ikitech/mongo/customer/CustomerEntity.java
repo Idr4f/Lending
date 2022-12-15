@@ -1,6 +1,5 @@
-package co.com.ikitech.mongo.user;
+package co.com.ikitech.mongo.customer;
 
-import co.com.ikitech.model.user.document.DocumentType;
 import co.com.ikitech.mongo.credit.CreditEntity;
 import co.com.ikitech.mongo.document.DocumentTypeEntity;
 import lombok.*;
@@ -11,7 +10,7 @@ import org.springframework.data.mongodb.core.mapping.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Document(collection = "user")
-public class UserEntity {
+public class CustomerEntity {
 
     @Id
     private String id;
