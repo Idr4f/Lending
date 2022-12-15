@@ -21,18 +21,18 @@ public class CreditRest extends IkiTechRestService<CreditDTO, Credit> {
     private final CreditMapper MAP = Mappers.getMapper(CreditMapper.class);
 
     @GetMapping(path = "/credit/{id}")
-    public Mono<Credit> getUserById(@PathVariable String id){
+    public Mono<Credit> getCreditById(@PathVariable String id){
 
         return useCase.getById(id);
     }
 
-    @DeleteMapping(path = "/user/{id}")
+    @DeleteMapping(path = "/credit/{id}")
     public Mono<Void> delete(@PathVariable String id){
 
         return useCase.deleteCredit(id);
     }
 
-    @PutMapping(path = "/user/{id}")
+    @PutMapping(path = "/credit/{id}")
     public Mono<ResponseEntity<Map<String, Object>>> updateCredit(@PathVariable String id, @RequestBody CreditDTO dto){
 
         return Mono.just(dto).flatMap(dataTransfer -> useCase.update(id, MAP.toEntityCredit(dataTransfer))

@@ -1,7 +1,6 @@
 package co.com.ikitech.api.user.credit;
 
 import lombok.*;
-import java.util.Date;
 
 @Data
 @AllArgsConstructor

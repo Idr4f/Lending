@@ -2,11 +2,11 @@ package co.com.ikitech.api.user.document;
 
 //DTO del tipo de documento
 public enum DocumentTypeDTO {
-    CC("Cedula de Ciudadanía"),
-    CE("Cedula De Extranjería"),
-    PEP("Permiso Especial De Permanencia"),
-    PAP("Pasaporte"),
-    NIT("Número De Identificacion Tributaria");
+    CC("CC"),
+    CE("CE"),
+    PEP("PEP"),
+    PAP("PAP"),
+    NIT("NIT");
     public final String value;
     DocumentTypeDTO(String value){this.value = value;}
 }

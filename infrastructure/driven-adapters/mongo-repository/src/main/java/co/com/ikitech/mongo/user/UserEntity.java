@@ -17,7 +17,7 @@ public class UserEntity {
     private String id;
     private String names;
     private  String surNames;
-    private DocumentTypeEntity documentTypeEntity;
+    private DocumentTypeEntity documentType;
     private String documentNumber;
     private String email;
     private String address;

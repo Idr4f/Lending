@@ -26,6 +26,7 @@ public class UserRest extends IkiTechRestService<UserDTO, User> {
 
 
     @PostMapping(path = "/user", consumes = MediaType.APPLICATION_JSON_VALUE)
+
     public Mono<ResponseEntity<Map<String, Object>>> createRecord(@RequestHeader(name = "Accept-Language", required = false)
                                                                       final Locale locale,
                                                                   @Valid @RequestBody UserDTO dto) {
@@ -38,7 +39,6 @@ public class UserRest extends IkiTechRestService<UserDTO, User> {
 
     @GetMapping(path = "/user")
     public Flux<User> getAll(){
-
 
         return useCase.getAll();
     }
@@ -64,7 +64,7 @@ public class UserRest extends IkiTechRestService<UserDTO, User> {
 
     }
 
-    @PutMapping(path = "/user/credit/{id}")
+    @PostMapping (path = "/user/credit/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public Mono<User> createCredit(@PathVariable String id, @RequestBody CreditDTO dto){
 
         return Mono.just(dto).flatMap(dataTransfer -> useCase.createUserCredit(id, MAP.toEntityCredit(dto)));

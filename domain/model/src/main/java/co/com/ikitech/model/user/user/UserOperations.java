@@ -1,12 +1,9 @@
 package co.com.ikitech.model.user.user;
 
 import co.com.ikitech.model.user.credit.Credit;
-import reactor.core.publisher.*;
-
-import java.time.Instant;
+import reactor.core.publisher.Mono;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 
 //operaciones a realizar con el model, sin usar directamente el model
 public interface UserOperations {
@@ -23,6 +20,7 @@ public interface UserOperations {
                         .email(user.getEmail())
                         .address(user.getAddress())
                         .phone(user.getPhone())
+                        .credit(userDB.getCredit())
                 .build());
     }
 
@@ -42,7 +40,7 @@ public interface UserOperations {
                                     .id(credit.getId())
                                     .dateLoan(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm:ss")))
                                     .valueDisbursed(credit.getValueDisbursed())
-                                    .paymentDeadline(LocalDateTime.parse(String.valueOf(credit.getPaymentDeadline())).format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")))
+                                    .paymentDeadline(credit.getPaymentDeadline())
                                     .interestValuation(credit.getInterestValuation())
                                     .interestValue(credit.getValueDisbursed() + credit.getInterestValuation()/100)
                                 .build())
