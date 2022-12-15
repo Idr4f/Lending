@@ -1,9 +1,8 @@
-package co.com.ikitech.api.user;
+package co.com.ikitech.api.user.user;
 
-import co.com.ikitech.api.user.ikitech.IkiTechRestService;
-import co.com.ikitech.model.user.error.UserMessageError;
-import co.com.ikitech.model.user.exceptions.AppException;
-import co.com.ikitech.model.user.user.User;
+import co.com.ikitech.api.user.credit.*;
+import co.com.ikitech.api.user.ikitech.*;
+import co.com.ikitech.model.user.user.*;
 import co.com.ikitech.usecase.user.*;
 import lombok.*;
 import org.mapstruct.factory.Mappers;
@@ -23,6 +22,7 @@ public class UserRest extends IkiTechRestService<UserDTO, User> {
     private final UserUseCase useCase;
 
     private final UserMapper MAPPER = Mappers.getMapper(UserMapper.class);
+    private final CreditMapper MAP = Mappers.getMapper(CreditMapper.class);
 
 
     @PostMapping(path = "/user", consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -62,5 +62,11 @@ public class UserRest extends IkiTechRestService<UserDTO, User> {
 
         return useCase.deleteUser(id);
 
+    }
+
+    @PutMapping(path = "/user/credit/{id}")
+    public Mono<User> createCredit(@PathVariable String id, @RequestBody CreditDTO dto){
+
+        return Mono.just(dto).flatMap(dataTransfer -> useCase.createUserCredit(id, MAP.toEntityCredit(dto)));
     }
 }

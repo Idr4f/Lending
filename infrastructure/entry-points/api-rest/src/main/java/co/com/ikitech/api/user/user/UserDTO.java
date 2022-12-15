@@ -1,4 +1,4 @@
-package co.com.ikitech.api.user;
+package co.com.ikitech.api.user.user;
 
 import co.com.ikitech.model.user.document.*;
 import lombok.*;

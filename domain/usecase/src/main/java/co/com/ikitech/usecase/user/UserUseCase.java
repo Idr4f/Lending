@@ -1,5 +1,6 @@
 package co.com.ikitech.usecase.user;
 
+import co.com.ikitech.model.user.credit.Credit;
 import co.com.ikitech.model.user.error.UserMessageError;
 import co.com.ikitech.model.user.exceptions.AppException;
 import co.com.ikitech.model.user.repository.*;
@@ -50,5 +51,11 @@ public class UserUseCase implements UserOperations {
       }
      */
 
+    public Mono<User> createUserCredit(String id, Credit credit){
+
+        return Mono.just(credit).flatMap(user1 -> this.getById(id))
+                .flatMap(userDB -> createCredit(credit, userDB))
+                .flatMap(repository::save);
+    }
 
 }

@@ -1,6 +1,7 @@
 package co.com.ikitech.mongo.user;
 
 import co.com.ikitech.model.user.document.DocumentType;
+import co.com.ikitech.mongo.credit.CreditEntity;
 import co.com.ikitech.mongo.document.DocumentTypeEntity;
 import lombok.*;
 import org.springframework.data.annotation.*;
@@ -21,4 +22,5 @@ public class UserEntity {
     private String email;
     private String address;
     private String phone;
+    private CreditEntity credit;
 }

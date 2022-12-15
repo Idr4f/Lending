@@ -1,5 +1,6 @@
 package co.com.ikitech.model.user.user;
 
+import co.com.ikitech.model.user.credit.Credit;
 import co.com.ikitech.model.user.document.DocumentType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,4 +22,5 @@ public class User {
     private String email;
     private String address;
     private String phone;
+    private Credit credit;
 }
