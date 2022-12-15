@@ -9,7 +9,7 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Document(collection = "credit")
+@Document(collection = "credits")
 public class CreditEntity {
 
     @Id
