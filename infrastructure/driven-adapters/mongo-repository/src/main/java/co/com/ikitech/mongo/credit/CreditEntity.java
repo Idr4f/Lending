@@ -18,5 +18,6 @@ public class CreditEntity {
     private String paymentDeadline;
     private Long interestValuation;
     private Long interestValue;
+    private Long deposited;
     private Long remainingDebt;
 }

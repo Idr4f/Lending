@@ -14,5 +14,6 @@ public class CreditDTO {
     private String paymentDeadline;
     private Long interestValuation;
     private Long interestValue;
+    private Long deposited;
     private Long remainingDebt;
 }
