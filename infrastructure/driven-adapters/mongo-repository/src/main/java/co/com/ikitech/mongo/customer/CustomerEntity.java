@@ -21,5 +21,4 @@ public class CustomerEntity {
     private String email;
     private String address;
     private String phone;
-    private CreditEntity credit;
 }

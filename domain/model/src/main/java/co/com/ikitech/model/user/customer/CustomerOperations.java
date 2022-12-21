@@ -20,7 +20,6 @@ public interface CustomerOperations {
                         .email(user.getEmail())
                         .address(user.getAddress())
                         .phone(user.getPhone())
-                        .credit(userDB.getCredit())
                 .build());
     }
 
@@ -36,17 +35,17 @@ public interface CustomerOperations {
                         .email(userDB.getEmail())
                         .address(userDB.getAddress())
                         .phone(userDB.getPhone())
-                        .credit(credit
-                                .toBuilder()
-                                    .id(credit.getId())
-                                    .dateLoan(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm:ss")))
-                                    .valueDisbursed(credit.getValueDisbursed())
-                                    .paymentDeadline(credit.getPaymentDeadline())
-                                    .interestValuation(credit.getInterestValuation())
-                                    .interestValue(credit.getValueDisbursed() + credit.getInterestValuation()/100)
-                                    .deposited(0L)
-                                    .remainingDebt(credit.getValueDisbursed())
-                                .build())
+//                        .credit(credit
+//                                .toBuilder()
+//                                    .id(credit.getId())
+//                                    .dateLoan(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm:ss")))
+//                                    .valueDisbursed(credit.getValueDisbursed())
+//                                    .paymentDeadline(credit.getPaymentDeadline())
+//                                    .interestValuation(credit.getInterestValuation())
+//                                    .interestValue(credit.getValueDisbursed() + credit.getInterestValuation()/100)
+//                                    .deposited(0L)
+//                                    .remainingDebt(credit.getValueDisbursed())
+//                                .build())
                 .build());
     }
 }

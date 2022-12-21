@@ -19,22 +19,6 @@ import java.util.*;
 public class CustomerRest extends IkiTechRestService<CustomerDTO, Customer> {
     private final CustomerUseCase useCase;
 
-    private final CustomerMapper MAPPER = Mappers.getMapper(CustomerMapper.class);
-    private final CreditMapper MAP = Mappers.getMapper(CreditMapper.class);
-
-
-    @PostMapping(path = "/user", consumes = MediaType.APPLICATION_JSON_VALUE)
-
-    public Mono<ResponseEntity<Map<String, Object>>> createRecord(@RequestHeader(name = "Accept-Language", required = false)
-                                                                      final Locale locale,
-                                                                  @Valid @RequestBody CustomerDTO dto) {
-
-        return Mono.just(dto)
-                .flatMap(dataTransfer -> useCase.create(MAPPER.toEntity(dataTransfer)))
-                .map(businessObject -> createResponseSuccess(businessObject,
-                        MAPPER::toTransferObject));
-    }
-
     @GetMapping(path = "/user")
     public Flux<Customer> getAll(){
 
@@ -45,26 +29,5 @@ public class CustomerRest extends IkiTechRestService<CustomerDTO, Customer> {
     public Mono<Customer> getUserById(@PathVariable String id){
 
         return useCase.getById(id);
-    }
-
-    @PutMapping(path = "/user/{id}")
-    public Mono<ResponseEntity<Map<String, Object>>> updateUser(@PathVariable String id, @RequestBody CustomerDTO dto){
-
-        return Mono.just(dto).flatMap(dataTransfer -> useCase.update(id, MAPPER.toEntity(dataTransfer))
-                .map(businessObject -> createResponseSuccess(businessObject,
-                        MAPPER::toTransferObject)));
-    }
-
-    @DeleteMapping(path = "/user/{id}")
-    public Mono<Void> delete(@PathVariable String id){
-
-        return useCase.deleteUser(id);
-
-    }
-
-    @PostMapping (path = "/user/credit/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Mono<Customer> createCredit(@PathVariable String id, @RequestBody CreditDTO dto){
-
-        return Mono.just(dto).flatMap(dataTransfer -> useCase.createUserCredit(id, MAP.toEntityCredit(dto)));
     }
 }

@@ -13,8 +13,6 @@ public class CustomerDTO {
     private  String surNames;
     private DocumentTypeDTO documentType;
     private String documentNumber;
-    private String email;
     private String address;
     private String phone;
-    private CreditDTO credit;
 }
