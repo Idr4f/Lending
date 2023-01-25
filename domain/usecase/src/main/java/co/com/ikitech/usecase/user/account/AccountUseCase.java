@@ -19,7 +19,9 @@ public class AccountUseCase implements AccountOperations {
 
     public Mono<Account> create(Account account){
 
-        return repository.save(account)
+        //return repository.save(account)
+         //       .switchIfEmpty(Mono.error(new AppException(AccountMessageError.ACCOUNT_NOT_CREATE.value)));
+        return Mono.just(account).flatMap(a -> saveAccount(a)).flatMap(a -> repository.save(a))
                 .switchIfEmpty(Mono.error(new AppException(AccountMessageError.ACCOUNT_NOT_CREATE.value)));
     }
 
@@ -31,7 +33,7 @@ public class AccountUseCase implements AccountOperations {
 
     public Flux<Account> getAll() {
         return repository.findAll()
-                .switchIfEmpty(Mono.error(new AppException(AccountMessageError.NO_ACCOUNT_CREATED.value)));
+                .switchIfEmpty(Mono.error(new AppException(AccountMessageError.NO_ACCOUNTS_CREATED.value)));
     }
 
     public Mono<Account> update(String id, Account account) {

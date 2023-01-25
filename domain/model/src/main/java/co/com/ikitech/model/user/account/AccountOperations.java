@@ -46,4 +46,19 @@ public interface AccountOperations {
                         .build())
                 .build());
     }
+
+    default Mono<Account> saveAccount(Account account){
+        return Mono.just(account.toBuilder()
+                .id(account.getId())
+                .type(account.getType())
+                .nickName(account.getNickName())
+                .email(account.getEmail())
+                .openDate(account.getOpenDate())
+                .status(account.getStatus())
+                .password(account.getPassword())
+                .customer(account.getCustomer())
+                .credit(Credit.builder()
+                        .build())
+                .build());
+    }
 }

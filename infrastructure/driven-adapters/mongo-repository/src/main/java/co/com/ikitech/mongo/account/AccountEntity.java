@@ -1,19 +1,20 @@
-package co.com.ikitech.api.account;
+package co.com.ikitech.mongo.account;
 
-import co.com.ikitech.api.credit.CreditDTO;
-import co.com.ikitech.api.customer.CustomerDTO;
 import co.com.ikitech.model.user.credit.Credit;
 import co.com.ikitech.model.user.customer.Customer;
+import co.com.ikitech.mongo.credit.CreditEntity;
+import co.com.ikitech.mongo.customer.CustomerEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder(toBuilder = true)
-public class AccountDTO {
+@Document(collection = "accounts")
+public class AccountEntity {
 
     private String id;
     private String type;
@@ -22,6 +23,6 @@ public class AccountDTO {
     private String openDate;
     private String status;
     private String password;
-    private CustomerDTO customer;
-    private CreditDTO credit;
+    private CustomerEntity customer;
+    private CreditEntity credit;
 }

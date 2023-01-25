@@ -2,13 +2,9 @@ package co.com.ikitech.api.account;
 
 import co.com.ikitech.api.credit.CreditDTO;
 import co.com.ikitech.api.credit.CreditMapper;
-import co.com.ikitech.api.customer.CustomerDTO;
-import co.com.ikitech.api.customer.CustomerMapper;
 import co.com.ikitech.api.ikitech.IkiTechRestService;
 import co.com.ikitech.model.user.account.Account;
-import co.com.ikitech.model.user.customer.Customer;
 import co.com.ikitech.usecase.user.account.AccountUseCase;
-import co.com.ikitech.usecase.user.customer.CustomerUseCase;
 import lombok.AllArgsConstructor;
 import org.mapstruct.factory.Mappers;
 import org.springframework.http.MediaType;
@@ -24,6 +20,7 @@ import java.util.Map;
 @RestController
 @RequestMapping(value = "/api", produces = MediaType.APPLICATION_JSON_VALUE)
 @AllArgsConstructor
+@CrossOrigin(origins = "*")
 public class AccountRest extends IkiTechRestService<AccountDTO, Account> {
     private final AccountUseCase useCase;
 
@@ -31,7 +28,7 @@ public class AccountRest extends IkiTechRestService<AccountDTO, Account> {
     private final CreditMapper MAP = Mappers.getMapper(CreditMapper.class);
 
 
-    @PostMapping(path = "/account", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(path = "/account")
     public Mono<ResponseEntity<Map<String, Object>>> createAccount(@RequestHeader(name = "Accept-Language", required = false)
                                                                       final Locale locale,
                                                                   @Valid @RequestBody AccountDTO dto) {
@@ -48,7 +45,7 @@ public class AccountRest extends IkiTechRestService<AccountDTO, Account> {
         return useCase.getById(id);
     }
 
-    @GetMapping(path = "/user")
+    @GetMapping(path = "/account")
     public Flux<Account> getAll(){
 
         return useCase.getAll();
@@ -62,7 +59,7 @@ public class AccountRest extends IkiTechRestService<AccountDTO, Account> {
                         MAPPER::toTransferObject)));
     }
 
-    @PostMapping (path = "/account/{id}/credit", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping (path = "/account/{id}/credit")
     public Mono<Account> createCredit(@PathVariable String id, @RequestBody CreditDTO dto){
 
         return Mono.just(dto).flatMap(dataTransfer -> useCase.createCredit(id, MAP.toEntityCredit(dto)));

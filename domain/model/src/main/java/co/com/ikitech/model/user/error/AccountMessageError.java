@@ -6,7 +6,7 @@ public enum AccountMessageError {
 
     ACCOUNT_NOT_CREATE("account.accountNotCreate"),
 
-    NO_ACCOUNT_CREATED("account.notAccountsCreated");
+    NO_ACCOUNTS_CREATED("account.notAccountsCreated");
 
     public final String value;
 

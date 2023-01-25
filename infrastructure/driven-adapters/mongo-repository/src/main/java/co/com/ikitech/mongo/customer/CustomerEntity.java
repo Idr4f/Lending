@@ -1,10 +1,10 @@
 package co.com.ikitech.mongo.customer;
-
-import co.com.ikitech.mongo.credit.CreditEntity;
 import co.com.ikitech.mongo.document.DocumentTypeEntity;
-import lombok.*;
-import org.springframework.data.annotation.*;
-import org.springframework.data.mongodb.core.mapping.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
 @NoArgsConstructor

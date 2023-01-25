@@ -16,6 +16,7 @@ import java.util.*;
 @RestController
 @RequestMapping(value = "/api", produces = MediaType.APPLICATION_JSON_VALUE)
 @AllArgsConstructor
+@CrossOrigin("*")
 public class CustomerRest extends IkiTechRestService<CustomerDTO, Customer> {
     private final CustomerUseCase useCase;
 
