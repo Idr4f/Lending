@@ -20,7 +20,10 @@ public class AccountUseCase implements AccountOperations {
 
     public Mono<Account> create(Account account){
 
-        return repository.save(account)
+        //return repository.save(account)
+        //        .switchIfEmpty(Mono.error(new AppException(AccountMessageError.ACCOUNT_NOT_CREATE.value)));
+
+        return Mono.just(account).flatMap(a -> saveAccount(a)).flatMap(ac -> repository.save(ac))
                 .switchIfEmpty(Mono.error(new AppException(AccountMessageError.ACCOUNT_NOT_CREATE.value)));
     }
 

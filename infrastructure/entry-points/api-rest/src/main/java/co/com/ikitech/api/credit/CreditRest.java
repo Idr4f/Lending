@@ -15,7 +15,7 @@ import java.util.Map;
 @RestController
 @RequestMapping(value = "/api", produces = MediaType.APPLICATION_JSON_VALUE)
 @AllArgsConstructor
-@CrossOrigin("*")
+@CrossOrigin(origins = "*")
 public class CreditRest extends IkiTechRestService<CreditDTO, Credit> {
     private final CreditUseCase useCase;
 

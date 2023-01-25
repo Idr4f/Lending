@@ -31,7 +31,7 @@ public interface AccountOperations {
                 .type(accountDB.getType())
                 .nickName(accountDB.getNickName())
                 .email(accountDB.getEmail())
-                .openDate(accountDB.getOpenDate())
+                .openDate(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm:ss")))
                 .status(accountDB.getStatus())
                 .customer(accountDB.getCustomer())
                 .credit(credit.toBuilder()
@@ -47,4 +47,17 @@ public interface AccountOperations {
                 .build());
     }
 
+    default Mono<Account> saveAccount(Account account){
+        return
+        Mono.just(account.toBuilder()
+                .id(account.getId())
+                .type(account.getType())
+                .nickName(account.getNickName())
+                .email(account.getEmail())
+                .openDate(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm:ss")))
+                .status(account.getStatus())
+                .password(account.getPassword())
+                .customer(account.getCustomer())
+                .build());
+    }
 }
