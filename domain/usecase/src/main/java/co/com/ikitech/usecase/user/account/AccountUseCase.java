@@ -3,25 +3,24 @@ package co.com.ikitech.usecase.user.account;
 import co.com.ikitech.model.user.account.Account;
 import co.com.ikitech.model.user.account.AccountOperations;
 import co.com.ikitech.model.user.credit.Credit;
-import co.com.ikitech.model.user.customer.Customer;
 import co.com.ikitech.model.user.error.AccountMessageError;
-import co.com.ikitech.model.user.error.UserMessageError;
 import co.com.ikitech.model.user.exceptions.AppException;
 import co.com.ikitech.model.user.repository.Repository;
-import reactor.core.publisher.*;
-
-import javax.security.auth.login.AccountNotFoundException;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 public class AccountUseCase implements AccountOperations {
 
-    Repository<Account> repository;
+    private final Repository<Account> repository;
+
+    public AccountUseCase(Repository<Account> repository) {
+        this.repository = repository;
+    }
 
 
     public Mono<Account> create(Account account){
 
-        //return repository.save(account)
-         //       .switchIfEmpty(Mono.error(new AppException(AccountMessageError.ACCOUNT_NOT_CREATE.value)));
-        return Mono.just(account).flatMap(a -> saveAccount(a)).flatMap(a -> repository.save(a))
+        return repository.save(account)
                 .switchIfEmpty(Mono.error(new AppException(AccountMessageError.ACCOUNT_NOT_CREATE.value)));
     }
 

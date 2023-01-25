@@ -18,7 +18,6 @@ public class CustomerEntity {
     private  String surNames;
     private DocumentTypeEntity documentType;
     private String documentNumber;
-    private String email;
     private String address;
     private String phone;
 }

@@ -50,12 +50,6 @@ public class CustomerUseCase implements CustomerOperations {
             .flatMap(r -> repository.deleteById(id));
       }
      */
-
-    public Mono<Customer> createUserCredit(String id, Credit credit){
-
-        return Mono.just(credit).flatMap(user1 -> this.getById(id))
-                .flatMap(userDB -> createCredit(credit, userDB))
-                .flatMap(repository::save);
-    }
+    
 
 }

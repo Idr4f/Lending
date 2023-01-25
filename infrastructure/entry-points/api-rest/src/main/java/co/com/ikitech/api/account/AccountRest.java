@@ -28,7 +28,7 @@ public class AccountRest extends IkiTechRestService<AccountDTO, Account> {
     private final CreditMapper MAP = Mappers.getMapper(CreditMapper.class);
 
 
-    @PostMapping(path = "/account")
+    @PostMapping(path = "/account", consumes = MediaType.APPLICATION_JSON_VALUE)
     public Mono<ResponseEntity<Map<String, Object>>> createAccount(@RequestHeader(name = "Accept-Language", required = false)
                                                                       final Locale locale,
                                                                   @Valid @RequestBody AccountDTO dto) {
@@ -51,7 +51,7 @@ public class AccountRest extends IkiTechRestService<AccountDTO, Account> {
         return useCase.getAll();
     }
 
-    @PutMapping(path = "/account/{id}")
+    @PutMapping(path = "/account/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public Mono<ResponseEntity<Map<String, Object>>> updateUser(@PathVariable String id, @RequestBody AccountDTO dto){
 
         return Mono.just(dto).flatMap(dataTransfer -> useCase.update(id, MAPPER.toEntity(dataTransfer))
@@ -59,7 +59,7 @@ public class AccountRest extends IkiTechRestService<AccountDTO, Account> {
                         MAPPER::toTransferObject)));
     }
 
-    @PostMapping (path = "/account/{id}/credit")
+    @PostMapping (path = "/account/{id}/credit",  consumes = MediaType.APPLICATION_JSON_VALUE)
     public Mono<Account> createCredit(@PathVariable String id, @RequestBody CreditDTO dto){
 
         return Mono.just(dto).flatMap(dataTransfer -> useCase.createCredit(id, MAP.toEntityCredit(dto)));

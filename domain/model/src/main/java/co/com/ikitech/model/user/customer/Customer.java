@@ -1,6 +1,5 @@
 package co.com.ikitech.model.user.customer;
 
-import co.com.ikitech.model.user.credit.Credit;
 import co.com.ikitech.model.user.document.DocumentType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,7 +18,6 @@ public class Customer {
     private  String surNames;
     private DocumentType documentType;
     private String documentNumber;
-    private String email;
     private String address;
     private String phone;
 }

@@ -17,7 +17,6 @@ public interface CustomerOperations {
                         .surNames(user.getSurNames())
                         .documentType(user.getDocumentType())
                         .documentNumber(user.getDocumentNumber())
-                        .email(user.getEmail())
                         .address(user.getAddress())
                         .phone(user.getPhone())
                 .build());
@@ -32,7 +31,6 @@ public interface CustomerOperations {
                         .surNames(userDB.getSurNames())
                         .documentType(userDB.getDocumentType())
                         .documentNumber(userDB.getDocumentNumber())
-                        .email(userDB.getEmail())
                         .address(userDB.getAddress())
                         .phone(userDB.getPhone())
 //                        .credit(credit
