@@ -1,6 +1,8 @@
 package co.com.ikitech.usecase.user.credit;
 
+import co.com.ikitech.model.user.account.Account;
 import co.com.ikitech.model.user.credit.*;
+import co.com.ikitech.model.user.error.CreditMessageError;
 import co.com.ikitech.model.user.error.UserMessageError;
 import co.com.ikitech.model.user.exceptions.AppException;
 import co.com.ikitech.model.user.repository.*;
@@ -10,7 +12,8 @@ import reactor.core.publisher.Mono;
 @RequiredArgsConstructor
 public class CreditUseCase implements CreditOperations{
 
-    Repository<Credit> repository;
+   private final Repository<Credit> repository;
+    private final Repository<Account> repo;
 
     public Mono<Credit> getById(String id){
 

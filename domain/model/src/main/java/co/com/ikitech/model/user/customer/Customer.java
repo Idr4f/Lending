@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)
-//Modelo principal de los datos del usuario
+
 public class Customer {
 
     private String id;

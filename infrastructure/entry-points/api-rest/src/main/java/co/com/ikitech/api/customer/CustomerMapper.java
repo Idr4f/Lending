@@ -1,7 +1,7 @@
 package co.com.ikitech.api.customer;
 
 
-import co.com.ikitech.model.user.customer.Customer;
+import co.com.ikitech.model.user.customer.*;
 import org.mapstruct.*;
 import org.mapstruct.factory.*;
 
@@ -12,8 +12,8 @@ CustomerMapper INSTANCE = Mappers.getMapper(CustomerMapper.class);
 
     @Mapping(target="id", source = "id",
         defaultExpression = "java(java.util.UUID.randomUUID().toString())")
-    Customer toEntity(CustomerDTO dto);
+    Customer toEntityUser(CustomerDTO dto);
 
 
-    CustomerDTO toTransferObject(Customer user);
+    CustomerDTO toTransferObject(Customer customer);
 }

@@ -3,7 +3,7 @@ package co.com.ikitech.api.credit;
 import co.com.ikitech.api.ikitech.IkiTechRestService;
 import co.com.ikitech.model.user.credit.Credit;
 import co.com.ikitech.usecase.user.credit.CreditUseCase;
-import lombok.*;
+import lombok.AllArgsConstructor;
 import org.mapstruct.factory.Mappers;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +17,7 @@ import java.util.Map;
 @AllArgsConstructor
 @CrossOrigin(origins = "*")
 public class CreditRest extends IkiTechRestService<CreditDTO, Credit> {
+
     private final CreditUseCase useCase;
 
     private final CreditMapper MAP = Mappers.getMapper(CreditMapper.class);
@@ -40,5 +41,6 @@ public class CreditRest extends IkiTechRestService<CreditDTO, Credit> {
                 .map(businessObject -> createResponseSuccess(businessObject,
                         MAP::toTransferObjectCredit)));
     }
+
 
 }

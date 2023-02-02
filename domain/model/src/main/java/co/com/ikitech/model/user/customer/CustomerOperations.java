@@ -22,28 +22,4 @@ public interface CustomerOperations {
                 .build());
     }
 
-    default Mono<Customer> createCredit(Credit credit, Customer userDB){
-
-        return Mono.just(userDB
-                .toBuilder()
-                        .id(userDB.getId())
-                        .names(userDB.getNames())
-                        .surNames(userDB.getSurNames())
-                        .documentType(userDB.getDocumentType())
-                        .documentNumber(userDB.getDocumentNumber())
-                        .address(userDB.getAddress())
-                        .phone(userDB.getPhone())
-//                        .credit(credit
-//                                .toBuilder()
-//                                    .id(credit.getId())
-//                                    .dateLoan(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm:ss")))
-//                                    .valueDisbursed(credit.getValueDisbursed())
-//                                    .paymentDeadline(credit.getPaymentDeadline())
-//                                    .interestValuation(credit.getInterestValuation())
-//                                    .interestValue(credit.getValueDisbursed() + credit.getInterestValuation()/100)
-//                                    .deposited(0L)
-//                                    .remainingDebt(credit.getValueDisbursed())
-//                                .build())
-                .build());
-    }
 }

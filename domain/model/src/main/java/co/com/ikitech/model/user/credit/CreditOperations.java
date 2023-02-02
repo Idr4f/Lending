@@ -1,5 +1,6 @@
 package co.com.ikitech.model.user.credit;
 
+import co.com.ikitech.model.user.account.Account;
 import reactor.core.publisher.*;
 import java.time.*;
 import java.time.format.*;
@@ -35,11 +36,10 @@ public interface CreditOperations {
                         .valueDisbursed(creditDB.getValueDisbursed())
                         .paymentDeadline(creditDB.getPaymentDeadline())
                         .interestValuation(creditDB.getInterestValuation())
-                        .interestValue(creditDB.getValueDisbursed() + creditDB.getInterestValuation()/100)
+                        .interestValue(creditDB.getValueDisbursed() * creditDB.getInterestValuation()/100)
                         .deposited(creditDB.getDeposited() + credit.getDeposited())
                         .remainingDebt(creditDB.getRemainingDebt() - credit.getDeposited())
                 .build());
     }
-
 
 }

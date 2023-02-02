@@ -2,9 +2,13 @@ package co.com.ikitech.api.account;
 
 import co.com.ikitech.api.credit.CreditDTO;
 import co.com.ikitech.api.credit.CreditMapper;
+import co.com.ikitech.api.customer.CustomerMapper;
 import co.com.ikitech.api.ikitech.IkiTechRestService;
 import co.com.ikitech.model.user.account.Account;
+import co.com.ikitech.model.user.credit.Credit;
 import co.com.ikitech.usecase.user.account.AccountUseCase;
+import co.com.ikitech.usecase.user.credit.CreditUseCase;
+import co.com.ikitech.usecase.user.customer.CustomerUseCase;
 import lombok.AllArgsConstructor;
 import org.mapstruct.factory.Mappers;
 import org.springframework.http.MediaType;
@@ -23,18 +27,17 @@ import java.util.Map;
 @CrossOrigin(origins = "*")
 public class AccountRest extends IkiTechRestService<AccountDTO, Account> {
     private final AccountUseCase useCase;
-
+    private final CustomerUseCase useC;
     private final AccountMapper MAPPER = Mappers.getMapper(AccountMapper.class);
     private final CreditMapper MAP = Mappers.getMapper(CreditMapper.class);
-
+    private final CustomerMapper MAPP = Mappers.getMapper(CustomerMapper.class);
 
     @PostMapping(path = "/account", consumes = MediaType.APPLICATION_JSON_VALUE)
     public Mono<ResponseEntity<Map<String, Object>>> createAccount(@RequestHeader(name = "Accept-Language", required = false)
                                                                       final Locale locale,
                                                                   @Valid @RequestBody AccountDTO dto) {
 
-        return Mono.just(dto)
-                .flatMap(dataTransfer -> useCase.create(MAPPER.toEntity(dataTransfer)))
+        return Mono.just(dto).flatMap(dataTransfer -> useCase.create(MAPPER.toEntity(dto), MAPP.toEntityUser(dto.getCustomer()) ))
                 .map(businessObject -> createResponseSuccess(businessObject,
                         MAPPER::toTransferObject));
     }
@@ -58,17 +61,15 @@ public class AccountRest extends IkiTechRestService<AccountDTO, Account> {
                 .map(businessObject -> createResponseSuccess(businessObject,
                         MAPPER::toTransferObject)));
     }
+    @PutMapping(path = "/account/{id}/credit",  consumes = MediaType.APPLICATION_JSON_VALUE)
+    public Mono<Credit> createCredit(@PathVariable String id, @RequestBody CreditDTO dto){
 
-    @PostMapping (path = "/account/{id}/credit",  consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Mono<Account> createCredit(@PathVariable String id, @RequestBody CreditDTO dto){
 
-        return Mono.just(dto).flatMap(dataTransfer -> useCase.createCredit(id, MAP.toEntityCredit(dto)));
+        return Mono.just(dto).flatMap(dataTransfer -> useCase.createCredit( id, MAP.toEntityCredit(dataTransfer)));
     }
-
     @DeleteMapping(path = "/account/{id}")
     public Mono<Void> delete(@PathVariable String id){
 
-        return useCase.delete(id);
-
+             return useCase.delete(id);
     }
 }

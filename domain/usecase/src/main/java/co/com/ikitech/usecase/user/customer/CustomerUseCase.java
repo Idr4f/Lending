@@ -14,11 +14,6 @@ public class CustomerUseCase implements CustomerOperations {
 
     private final Repository<Customer> repository;
 
-    public Mono<Customer> create(Customer user){
-
-        return repository.save(user)
-                .switchIfEmpty(Mono.error(new AppException(UserMessageError.USER_NOT_CREATE.value)));
-    }
 
     public Flux<Customer> getAll(){
 
