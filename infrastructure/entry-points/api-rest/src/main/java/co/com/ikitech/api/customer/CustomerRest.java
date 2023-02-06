@@ -31,4 +31,10 @@ public class CustomerRest extends IkiTechRestService<CustomerDTO, Customer> {
 
         return useCase.getById(id);
     }
+
+    @DeleteMapping(path = "/user/{id}")
+    public Mono<Void> deleteUser(@PathVariable String id){
+
+        return useCase.deleteUser(id);
+    }
 }
