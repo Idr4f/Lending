@@ -2,13 +2,10 @@ package co.com.ikitech.api.account;
 
 import co.com.ikitech.api.credit.CreditDTO;
 import co.com.ikitech.api.credit.CreditMapper;
-import co.com.ikitech.api.customer.CustomerMapper;
 import co.com.ikitech.api.ikitech.IkiTechRestService;
 import co.com.ikitech.model.user.account.Account;
 import co.com.ikitech.model.user.credit.Credit;
 import co.com.ikitech.usecase.user.account.AccountUseCase;
-import co.com.ikitech.usecase.user.credit.CreditUseCase;
-import co.com.ikitech.usecase.user.customer.CustomerUseCase;
 import lombok.AllArgsConstructor;
 import org.mapstruct.factory.Mappers;
 import org.springframework.http.MediaType;
@@ -27,17 +24,15 @@ import java.util.Map;
 @CrossOrigin(origins = "*")
 public class AccountRest extends IkiTechRestService<AccountDTO, Account> {
     private final AccountUseCase useCase;
-    private final CustomerUseCase useC;
     private final AccountMapper MAPPER = Mappers.getMapper(AccountMapper.class);
     private final CreditMapper MAP = Mappers.getMapper(CreditMapper.class);
-    private final CustomerMapper MAPP = Mappers.getMapper(CustomerMapper.class);
 
     @PostMapping(path = "/account", consumes = MediaType.APPLICATION_JSON_VALUE)
     public Mono<ResponseEntity<Map<String, Object>>> createAccount(@RequestHeader(name = "Accept-Language", required = false)
                                                                       final Locale locale,
                                                                   @Valid @RequestBody AccountDTO dto) {
 
-        return Mono.just(dto).flatMap(dataTransfer -> useCase.create(MAPPER.toEntity(dto), MAPP.toEntityUser(dto.getCustomer()) ))
+        return Mono.just(dto).flatMap(dataTransfer -> useCase.create(MAPPER.toEntity(dto)))
                 .map(businessObject -> createResponseSuccess(businessObject,
                         MAPPER::toTransferObject));
     }
@@ -46,6 +41,12 @@ public class AccountRest extends IkiTechRestService<AccountDTO, Account> {
     public Mono<Account> getUserById(@PathVariable String id){
 
         return useCase.getById(id);
+    }
+
+    @GetMapping(path = "/account/{name}")
+    public Mono<Account> findByName(@PathVariable String names){
+
+        return useCase.getByName(names);
     }
 
     @GetMapping(path = "/account")

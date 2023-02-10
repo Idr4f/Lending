@@ -1,12 +1,10 @@
 package co.com.ikitech.model.user.account;
 
 import co.com.ikitech.model.user.credit.Credit;
-import co.com.ikitech.model.user.customer.Customer;
 import reactor.core.publisher.Mono;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.UUID;
 
 public interface AccountOperations {
 
@@ -14,20 +12,25 @@ public interface AccountOperations {
 
         return Mono.just(accountDB
                 .toBuilder()
-                        .id(account.getId())
+                        .id(accountDB.getId())
                         .type(account.getType())
                         .nickName(account.getNickName())
                         .email(account.getEmail())
-                        .openDate(account.getOpenDate())
-                        .status(account.getStatus())
+                        .openDate(accountDB.getOpenDate())
                         .password(account.getPassword())
-                        .customer(account.getCustomer())
+                        .names(account.getNames())
+                        .surNames(account.getSurNames())
+                        .documentType(account.getDocumentType())
+                        .documentNumber(account.getDocumentNumber())
+                        .address(account.getAddress())
+                        .phone(account.getPhone())
+                        .status("Updated")
                 .build());
     }
 
 
 
-    default Mono<Account> saveAccount(Account account, Customer customer){
+    default Mono<Account> saveAccount(Account account){
         return
         Mono.just(account.toBuilder()
                 .id(account.getId())
@@ -35,17 +38,14 @@ public interface AccountOperations {
                 .nickName(account.getNickName())
                 .email(account.getEmail())
                 .openDate(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm:ss")))
-                .status(account.getStatus())
                 .password(account.getPassword())
-                .customer(Customer.builder()
-                        .id(customer.getId())
-                        .names(customer.getNames())
-                        .surNames(customer.getSurNames())
-                        .documentType(customer.getDocumentType())
-                        .documentNumber(customer.getDocumentNumber())
-                        .address(customer.getAddress())
-                        .phone(customer.getPhone())
-                        .build())
+                .names(account.getNames())
+                .surNames(account.getSurNames())
+                .documentType(account.getDocumentType())
+                .documentNumber(account.getDocumentNumber())
+                .address(account.getAddress())
+                .phone(account.getPhone())
+                .status("Created")
                 .build());
     }
     default Mono<Account> createCredit(Credit credit, Account accountDB) {
@@ -56,9 +56,14 @@ public interface AccountOperations {
                 .type(accountDB.getType())
                 .nickName(accountDB.getNickName())
                 .email(accountDB.getEmail())
-                .openDate(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm:ss")))
-                .status(accountDB.getStatus())
-                .customer(accountDB.getCustomer())
+                .openDate(accountDB.getOpenDate())
+                .password(accountDB.getPassword())
+                .names(accountDB.getNames())
+                .surNames(accountDB.getSurNames())
+                .documentType(accountDB.getDocumentType())
+                .documentNumber(accountDB.getDocumentNumber())
+                .address(accountDB.getAddress())
+                .phone(accountDB.getPhone())
                 .credit(credit.toBuilder()
                         .id(credit.getId())
                         .dateLoan(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm:ss")))
@@ -67,8 +72,12 @@ public interface AccountOperations {
                         .interestValuation(credit.getInterestValuation())
                         .interestValue(credit.getValueDisbursed() * credit.getInterestValuation()/100)
                         .deposited(0L)
-                        .remainingDebt(credit.getValueDisbursed())
+                        .remainingDebt(credit.getValueDisbursed() + (credit.getValueDisbursed() * credit.getInterestValuation()/100))
+                        .status("Created")
                         .build())
+                .status(accountDB.getStatus())
                 .build());
     }
+
+
 }

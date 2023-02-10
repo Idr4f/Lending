@@ -1,12 +1,10 @@
 package co.com.ikitech.mongo.credit;
 
 import co.com.ikitech.model.user.credit.Credit;
-import co.com.ikitech.model.user.customer.Customer;
-import co.com.ikitech.mongo.customer.CustomerDBRepository;
-import co.com.ikitech.mongo.customer.CustomerEntity;
 import co.com.ikitech.mongo.helper.AdapterOperations;
 import org.reactivecommons.utils.ObjectMapper;
 import org.springframework.stereotype.Repository;
+import reactor.core.publisher.Mono;
 
 @Repository
 public class CreditRepositoryAdapter extends AdapterOperations<Credit, CreditEntity, String, CreditDBRepository>
@@ -20,4 +18,8 @@ public class CreditRepositoryAdapter extends AdapterOperations<Credit, CreditEnt
     }
 
 
+    @Override
+    public Mono<Credit> findByNames(String name) {
+        return null;
+    }
 }

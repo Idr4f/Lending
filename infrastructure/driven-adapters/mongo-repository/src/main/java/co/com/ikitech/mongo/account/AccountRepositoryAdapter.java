@@ -1,12 +1,10 @@
 package co.com.ikitech.mongo.account;
 
 import co.com.ikitech.model.user.account.Account;
-import co.com.ikitech.model.user.customer.Customer;
-import co.com.ikitech.mongo.customer.CustomerDBRepository;
-import co.com.ikitech.mongo.customer.CustomerEntity;
 import co.com.ikitech.mongo.helper.AdapterOperations;
 import org.reactivecommons.utils.ObjectMapper;
 import org.springframework.stereotype.Repository;
+import reactor.core.publisher.Mono;
 
 @Repository
 public class AccountRepositoryAdapter extends AdapterOperations<Account, AccountEntity, String, AccountDBRepository>
@@ -20,4 +18,8 @@ public class AccountRepositoryAdapter extends AdapterOperations<Account, Account
     }
 
 
+    @Override
+    public Mono<Account> findByNames(String names) {
+        return repository.getByNames(names);
+    }
 }

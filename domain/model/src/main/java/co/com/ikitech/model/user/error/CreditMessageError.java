@@ -6,7 +6,9 @@ public enum CreditMessageError {
 
     CREDIT_NOT_CREATE("credit.creditNotCreate"),
 
-    NO_CREDITS_CREATED("CREDIT.notCreditsCreated");
+    NO_CREDITS_CREATED("CREDIT.notCreditsCreated"),
+
+    REMAIN_DEBIT_PENDING("credit.remainDebitPending");
 
     public final String value;
 

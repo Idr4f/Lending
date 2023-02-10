@@ -2,6 +2,7 @@ package co.com.ikitech.api.credit;
 
 
 import co.com.ikitech.model.user.credit.Credit;
+import co.com.ikitech.model.user.credit.Deposit;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
@@ -17,4 +18,7 @@ CreditMapper INSTANCE = Mappers.getMapper(CreditMapper.class);
 
 
     CreditDTO toTransferObjectCredit(Credit credit);
+
+    Deposit toTransform(DepositDTO dto);
+
 }

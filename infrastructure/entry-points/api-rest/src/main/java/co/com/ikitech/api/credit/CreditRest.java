@@ -35,9 +35,9 @@ public class CreditRest extends IkiTechRestService<CreditDTO, Credit> {
     }
 
     @PutMapping(path = "/credit/{id}")
-    public Mono<ResponseEntity<Map<String, Object>>> updateCredit(@PathVariable String id, @RequestBody CreditDTO dto){
+    public Mono<ResponseEntity<Map<String, Object>>> updateCredit(@PathVariable String id, @RequestBody DepositDTO dto){
 
-        return Mono.just(dto).flatMap(dataTransfer -> useCase.update(id, MAP.toEntityCredit(dataTransfer))
+        return Mono.just(dto).flatMap(dataTransfer -> useCase.update(id, MAP.toTransform(dataTransfer))
                 .map(businessObject -> createResponseSuccess(businessObject,
                         MAP::toTransferObjectCredit)));
     }

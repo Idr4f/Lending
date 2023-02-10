@@ -17,4 +17,5 @@ public class Credit {
     private Long interestValue;
     private Long deposited;
     private Long remainingDebt;
+    private String status;
 }

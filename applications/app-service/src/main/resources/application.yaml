@@ -13,7 +13,7 @@ spring:
     include: null
   data:
     mongodb:  
-      uri: "mongodb+srv://admin:admin@clustercursojava.dasxz.mongodb.net/Lending"
+      uri: "mongodb+srv://admin:admin@clustercursojava.dasxz.mongodb.net/Lending-proof"
 management:
   endpoints:
     web:

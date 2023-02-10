@@ -1,9 +1,7 @@
 package co.com.ikitech.api.account;
 
 
-import co.com.ikitech.api.customer.CustomerDTO;
 import co.com.ikitech.model.user.account.Account;
-import co.com.ikitech.model.user.customer.Customer;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;

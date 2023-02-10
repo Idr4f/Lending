@@ -1,11 +1,7 @@
 package co.com.ikitech.mongo.account;
 
-import co.com.ikitech.model.user.credit.Credit;
-import co.com.ikitech.model.user.customer.Customer;
 import co.com.ikitech.mongo.credit.CreditEntity;
-import co.com.ikitech.mongo.customer.CustomerEntity;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
@@ -23,8 +19,13 @@ public class AccountEntity {
     private String nickName;
     private String email;
     private String openDate;
-    private String status;
     private String password;
-    private CustomerEntity customer;
+    private String names;
+    private  String surNames;
+    private String documentType;
+    private String documentNumber;
+    private String address;
+    private String phone;
     private CreditEntity credit;
+    private String status;
 }

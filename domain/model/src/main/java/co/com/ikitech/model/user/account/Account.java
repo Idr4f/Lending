@@ -1,8 +1,10 @@
 package co.com.ikitech.model.user.account;
 
 import co.com.ikitech.model.user.credit.Credit;
-import co.com.ikitech.model.user.customer.Customer;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
@@ -15,8 +17,14 @@ public class Account {
     private String nickName;
     private String email;
     private String openDate;
-    private String status;
     private String password;
-    private Customer customer;
+    private String names;
+    private String surNames;
+    private String documentType;
+    private String documentNumber;
+    private String address;
+    private String phone;
     private Credit credit;
+
+    private String status;
 }
