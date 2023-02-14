@@ -30,10 +30,10 @@ public interface CreditOperations {
 
     default Long deposited(Credit creditDB, Deposit deposit) {
 
-        if (creditDB.getStatus() == "Created") {
+        if (creditDB.getStatus().equalsIgnoreCase("created")) {
 
             return deposit.getDeposit();
-        } else if (creditDB.getStatus() == "Updated") {
+        } else if (creditDB.getStatus().equalsIgnoreCase("updated")) {
 
             return creditDB.getDeposited() + deposit.getDeposit();
         } else {

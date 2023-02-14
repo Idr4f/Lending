@@ -18,21 +18,26 @@ public class CreditUseCase implements CreditOperations {
     public Mono<Credit> getById(String id){
 
         return repository.findById(id)
-                .switchIfEmpty(Mono.error(new AppException(UserMessageError.USER_NOT_EXIST.value)));
+                .switchIfEmpty(Mono.error(new AppException(CreditMessageError.CREDIT_NOT_EXIST.value)));
     }
 
     public Mono<Credit> update(String id, Deposit deposit){
 
-        return Mono.just(deposit).flatMap(credit1 -> this.getById(id))
+        return Mono.just(deposit).flatMap(credit1 -> repository.findById(id))
+                .switchIfEmpty(Mono.error(new AppException(CreditMessageError.CREDIT_NOT_EXIST.value)))
                 .flatMap(creditDB -> updateCreditModel(deposit, creditDB))
-                .flatMap(repository::save);
+                .filter(credit -> credit.depositGreaterThanDebt())
+                .switchIfEmpty(Mono.error(new AppException(CreditMessageError.DEPOSIT_GREATER_THAN_DEBT.value)))
+                .flatMap(repository::save)
+                .filter(credit -> credit.isValid())
+                .flatMap(credit -> this.deleteCredit(id).thenReturn(credit));
     }
 
     public Mono<Void> deleteCredit(String id){
 
         return this.getById(id)
                 .flatMap(credit -> {
-                    if (credit.getRemainingDebt() == 0){
+                    if (credit.isValid()){
                         return repository.deleteById(id);
                     }else {
                         return Mono.error(new AppException(CreditMessageError.REMAIN_DEBIT_PENDING.value));
@@ -40,4 +45,6 @@ public class CreditUseCase implements CreditOperations {
                     }
                 );
     }
+
+
 }

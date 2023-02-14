@@ -1,7 +1,6 @@
 package co.com.ikitech.model.user.credit;
 
 import lombok.*;
-import java.util.Date;
 
 @Data
 @NoArgsConstructor
@@ -18,4 +17,13 @@ public class Credit {
     private Long deposited;
     private Long remainingDebt;
     private String status;
+
+    public Boolean isValid(){
+        return getRemainingDebt() == 0;
+    }
+
+    public Boolean depositGreaterThanDebt(){
+
+        return getRemainingDebt() >= 0;
+    }
 }

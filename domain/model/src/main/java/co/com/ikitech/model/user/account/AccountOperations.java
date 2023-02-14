@@ -33,18 +33,7 @@ public interface AccountOperations {
     default Mono<Account> saveAccount(Account account){
         return
         Mono.just(account.toBuilder()
-                .id(account.getId())
-                .type(account.getType())
-                .nickName(account.getNickName())
-                .email(account.getEmail())
                 .openDate(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm:ss")))
-                .password(account.getPassword())
-                .names(account.getNames())
-                .surNames(account.getSurNames())
-                .documentType(account.getDocumentType())
-                .documentNumber(account.getDocumentNumber())
-                .address(account.getAddress())
-                .phone(account.getPhone())
                 .status("Created")
                 .build());
     }
