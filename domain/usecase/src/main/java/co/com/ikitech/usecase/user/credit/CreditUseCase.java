@@ -4,7 +4,6 @@ import co.com.ikitech.model.user.credit.Credit;
 import co.com.ikitech.model.user.credit.CreditOperations;
 import co.com.ikitech.model.user.credit.Deposit;
 import co.com.ikitech.model.user.error.CreditMessageError;
-import co.com.ikitech.model.user.error.UserMessageError;
 import co.com.ikitech.model.user.exceptions.AppException;
 import co.com.ikitech.model.user.repository.Repository;
 import lombok.RequiredArgsConstructor;

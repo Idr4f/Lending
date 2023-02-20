@@ -10,7 +10,9 @@ dependencies {
     implementation ('org.reactivecommons.utils:object-mapper:0.1.0')
     annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.2.Final'
 }
-
+test {
+    useJUnitPlatform()
+}
 
 configurations{
 	implementation.exclude group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat'

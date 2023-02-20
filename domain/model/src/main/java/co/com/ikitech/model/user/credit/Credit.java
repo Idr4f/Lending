@@ -1,6 +1,7 @@
 package co.com.ikitech.model.user.credit;
 
 import lombok.*;
+import java.math.BigDecimal;
 
 @Data
 @NoArgsConstructor
@@ -24,6 +25,6 @@ public class Credit {
 
     public Boolean depositGreaterThanDebt(){
 
-        return getRemainingDebt() >= 0;
+       return getDeposited() <= getRemainingDebt();
     }
 }

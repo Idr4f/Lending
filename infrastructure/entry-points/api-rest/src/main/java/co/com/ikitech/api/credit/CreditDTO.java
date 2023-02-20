@@ -1,6 +1,7 @@
 package co.com.ikitech.api.credit;
 
 import lombok.*;
+import java.math.BigDecimal;
 
 @Data
 @AllArgsConstructor
