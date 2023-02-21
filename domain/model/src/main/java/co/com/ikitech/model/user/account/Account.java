@@ -27,4 +27,9 @@ public class Account {
     private Credit credit;
 
     private String status;
+
+    public Boolean validEmail(){
+
+        return email.contains("@");
+    }
 }

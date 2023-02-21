@@ -20,6 +20,8 @@ public class AccountUseCase implements AccountOperations {
     public Mono<Account> create(Account account){
 
              return Mono.just(account)
+                     .filter(account1 -> account1.validEmail())
+                     .switchIfEmpty(Mono.error(new AppException(AccountMessageError.INVALID_EMAIL_FORMAT.value)))
                      .flatMap(account1 -> saveAccount(account))
                      .flatMap(repository::save)
                      .switchIfEmpty(Mono.error(new AppException(AccountMessageError.ACCOUNT_NOT_CREATE.value)));
@@ -39,18 +41,18 @@ public class AccountUseCase implements AccountOperations {
 
     public Mono<Account> update(String id, Account account) {
 
-        return Mono.just(account).flatMap(credit1 -> this.getById(id))
+        return Mono.just(account).flatMap(account1 -> this.getById(id))
                 .flatMap(accountDB -> updateModel(account, accountDB))
                 .flatMap(repository::save);
     }
-    public Mono<Void> delete(String id){
+    public Mono<String> delete(String id){
 
         return this.getById(id)
                 .filter(account -> account.getCredit().isValid())
                 .switchIfEmpty(Mono.error(new Exception(CreditMessageError.REMAIN_DEBIT_PENDING.value)))
                 .flatMap(account -> creditRepository.deleteById(account.getCredit().getId()).thenReturn(account))
-                .flatMap(account -> repository.deleteById(account.getId()));//.thenReturn(account));
-//                .map(account -> "La cuenta se elimino con exito");
+                .flatMap(account -> repository.deleteById(account.getId()).thenReturn(account))
+                .map(account -> "La cuenta se elimino con exito");
     }
     public Mono<Credit> createCredit(String id, Credit credit){
 

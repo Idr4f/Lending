@@ -64,7 +64,7 @@ public class AccountRest extends IkiTechRestService<AccountDTO, Account> {
         return Mono.just(dto).flatMap(dataTransfer -> useCase.createCredit( id, MAP.toEntityCredit(dataTransfer)));
     }
     @DeleteMapping(path = "/account/{id}")
-    public Mono<Void> delete(@PathVariable String id){
+    public Mono<String> delete(@PathVariable String id){
 
              return useCase.delete(id);
     }
