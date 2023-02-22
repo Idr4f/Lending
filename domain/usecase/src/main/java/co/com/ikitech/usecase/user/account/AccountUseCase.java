@@ -20,7 +20,7 @@ public class AccountUseCase implements AccountOperations {
     public Mono<Account> create(Account account){
 
              return Mono.just(account)
-                     .filter(account1 -> account1.validEmail())
+                     .filter(Account::validEmail)
                      .switchIfEmpty(Mono.error(new AppException(AccountMessageError.INVALID_EMAIL_FORMAT.value)))
                      .flatMap(account1 -> saveAccount(account))
                      .flatMap(repository::save)
@@ -42,6 +42,8 @@ public class AccountUseCase implements AccountOperations {
     public Mono<Account> update(String id, Account account) {
 
         return Mono.just(account).flatMap(account1 -> this.getById(id))
+                .filter(account2 -> account.validEmail())
+                .switchIfEmpty(Mono.error(new AppException(AccountMessageError.INVALID_EMAIL_FORMAT.value)))
                 .flatMap(accountDB -> updateModel(account, accountDB))
                 .flatMap(repository::save);
     }
@@ -63,8 +65,4 @@ public class AccountUseCase implements AccountOperations {
                 .switchIfEmpty(Mono.error(new AppException(CreditMessageError.CREDIT_NOT_CREATE.value)));
     }
 
-    public Mono<Account> getByName(String names){
-
-        return repository.findByNames(names).switchIfEmpty(Mono.error(new AppException(AccountMessageError.ACCOUNT_NOT_EXIST.value)));
-    }
 }

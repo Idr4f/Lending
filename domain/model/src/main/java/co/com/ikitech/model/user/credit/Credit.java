@@ -25,6 +25,6 @@ public class Credit {
 
     public Boolean depositGreaterThanDebt(){
 
-       return getDeposited() <= getRemainingDebt();
+       return getDeposited() >= getRemainingDebt();
     }
 }

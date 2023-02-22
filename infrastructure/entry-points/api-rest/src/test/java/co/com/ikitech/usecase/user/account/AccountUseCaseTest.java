@@ -90,4 +90,19 @@ public class AccountUseCaseTest {
         Mono<String> accountMono = accountUseCase.delete("1");
         assertThat(accountMono.block()).isEqualToIgnoringCase("la cuenta se elimino con exito");
     }
+    @Test
+    void createCredit(){
+
+        Account a1 = Account.builder().id("1").names("Cesar").build();
+        Account a2 = Account.builder().id("1").names("Andres").build();
+        Credit c1 = Credit.builder().id("1").valueDisbursed(200L).interestValuation(15L).remainingDebt(0L).build();
+        when(accountRepository.findById(anyString())).thenReturn(Mono.just(a1));
+        when(accountRepository.save(any())).thenReturn(Mono.just(a2));
+        when(creditRepository.save(any())).thenReturn(Mono.just(c1));
+
+        Mono<Account> monoAccount = accountUseCase.createCredit(c1, a1);
+
+        assertThat(monoAccount.block().getCredit().getId()).isEqualTo(c1.getId());
+
+    }
 }
